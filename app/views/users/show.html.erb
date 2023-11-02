@@ -10,17 +10,11 @@
                   } %></li>
 </ul>
 
-<h2>Posts</h2>
+<h2>Posts by <%= @user.name %></h2>
 <% @user.posts.each do |post| %>
-  <p>
-    <strong>Title:</strong>
-    <%= post.title %>
-  </p>
-
-  <p>
-    <strong>Content:</strong>
-    <%= post.content %>
-  </p>
+    <li>
+        <%= link_to post.title, user_post_path(@user, post) %>
+    </li>
 <% end %>
 
 <h2>Add a post:</h2>
@@ -36,4 +30,4 @@
     <p>
       <%= form.submit %>
     </p>
-  <% end %>
+<% end %>
