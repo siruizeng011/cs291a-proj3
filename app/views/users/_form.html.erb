@@ -2,10 +2,20 @@
       <div class="mb-3">
         <%= form.label :name, :class => "form-label" %><br>
         <%= form.text_field :name, :class => "form-control", :placeholder => user.name %>
+        <% if user.errors[:name].any? %>
+          <div class="alert alert-danger" role="alert">
+            <%= user.errors[:name].first %>
+          </div>
+        <% end %>
       </div>
       <div class="mb-3">
         <%= form.label :email, :class => "form-label" %><br>
         <%= form.text_field :email, :class => "form-control" %>
+        <% if user.errors[:email].any? %>
+          <div class="alert alert-danger" role="alert">
+            <%= user.errors[:email].first %>
+          </div>
+        <% end %>
       </div>
       <div class="btn">
         <%= form.submit %>

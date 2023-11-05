@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :show, :create]
   end
 
+  match "*path", to: "errors#not_found", via:  :all
+
 end
