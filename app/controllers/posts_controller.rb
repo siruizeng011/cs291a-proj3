@@ -15,16 +15,23 @@ class PostsController < ApplicationController
         @user = User.find(params[:user_id])
         @post = @user.posts.new(post_params)
         if @post.save
-            redirect_to @post
+            redirect_to user_path(@user)
         else
             render :new, status: :unprocessable_entity
         end
     end
-    
+
     def destroy
-        @user = User.find(params[:user_id])
-        @post = @user.posts.find(params[:id])
-        @post.destroy
+        @post = Post.find(params[:id])
+        @user = @post.user
+        begin
+          @post.destroy
+        rescue => e
+            flash[:alert] = "Error: #{e.message}"
+            raise ActiveRecord::Rollback
+        end
+
+
         redirect_to user_path(@user), status: :see_other
     end
 
@@ -32,5 +39,5 @@ class PostsController < ApplicationController
         def post_params
             params.require(:post).permit(:title, :content)
         end
-    
+
 end

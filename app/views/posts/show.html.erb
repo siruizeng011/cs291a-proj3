@@ -1,28 +1,45 @@
-<h1><%= @post.title %></h1>
+<div class="container-fluid">
+  <div class="d-flex">
+    <h1>Post Details</h1>
+  </div>
 
-<p><%= @post.content %></p>
+  <p>Title: <%= @post.title %></p>
+  <p>Content: <%= @post.content %></p>
 
-<ul>
-  <li><%= link_to "Destroy", post_path(@post), data: {
+  <div class="btn btn-danger btn-sm">
+                <%= link_to "Delete", post_path(@post), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+                }, :class => "btn" %>
+  </div>
 
-<h2>Comments by <%= @post.title %></h2>
-<% @post.comments.each do |comment| %>
-    <li>
-        <%= link_to comment.content, post_comment_path(@post, comment) %>
-    </li>
-<% end %>
+  <h2>Comments</h2>
 
-<h2>Add a comment:</h2>
-<%= form_with model: [ @post, @post.comments.build ] do |form| %>
-    <p>
-      <%= form.label :content %><br>
-      <%= form.text_area :content %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
+  <table class="table table-sm table-bordered align-middle">
+    <thead>
+    </thead>
+    <tbody>
+      <% @post.comments.each do |comment| %>
+          <tr>
+            <td styles="font-size: 20px;">
+              <%= comment.content%>
+            </td>
+
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <hr>
+  <h2>Add a comment:</h2>
+  <%= form_with model: [ @post, @post.comments.build ] do |form| %>
+      <div class="mb-3">
+        <%= form.label :content, :class => "form-label" %><br>
+        <%= form.text_area :content, :class => "form-control" %>
+      </div>
+      <div class="btn">
+        <%= form.submit %>
+      </div>
   <% end %>
+
+</div>

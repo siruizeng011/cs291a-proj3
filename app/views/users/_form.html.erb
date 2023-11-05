@@ -1,22 +1,15 @@
 <%= form_with model: user do |form| %>
-    <div>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
-      <% user.errors.full_messages_for(:name).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
-  
-    <div>
-      <%= form.label :email %><br>
-      <%= form.text_area :email %><br>
-      <% user.errors.full_messages_for(:email).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
-  
-    <div>
-      <%= form.submit %>
-    </div>
+      <div class="mb-3">
+        <%= form.label :name, :class => "form-label" %><br>
+        <%= form.text_field :name, :class => "form-control", :placeholder => user.name %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :email, :class => "form-label" %><br>
+        <%= form.text_field :email, :class => "form-control" %>
+      </div>
+      <div class="btn">
+        <%= form.submit %>
+      </div>
   <% end %>
+
   
